@@ -26,7 +26,7 @@ export default function FeaturedPost({ post }) {
         {/* Post Title */}
         <h2 className="text-2xl lg:text-4xl font-bold leading-tight mb-3">
           <Link
-            href={`/blog/${slug.current}`}
+            href={`/${slug.current}`}
             className="hover:text-blue-600 transition-colors duration-300"
           >
             {title}
