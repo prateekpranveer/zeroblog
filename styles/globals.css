@@ -1,4 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  font-family: roboto mono;
+}
+
+/* NProgress custom bar style */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #676e78 !important; /* Tailwind blue-500 */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  width: 100%;
+  box-shadow: none !important;
+  height: 6px !important;
+}
+
+#nprogress .peg {
+  box-shadow: none !important;
+  display: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, Opera */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.text-xs {
+  font-size: 12px;
+}
 
 :root {
   --background: #ffffff;
