@@ -5,9 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { PortableTextComponent } from "@/components/shared/PortableTextCompnent";
+import { client } from "@/src/sanity/lib/client";
+import CommentForm from "@/components/shared/CommentForm";
+import CommentThread from "@/components/shared/CommentThread";
 
 export default function Post({ post }) {
   const {
+    _id,
     title,
     slug,
     author,
@@ -26,7 +30,10 @@ export default function Post({ post }) {
 
       {/* Meta: Author / Date / Read Time */}
       <div className="flex flex-wrap text-sm text-gray-600 mb-6 space-x-4">
-        <Link href={`/author/${author.slug.current}`} className="hover:underline">
+        <Link
+          href={`/author/${author.slug.current}`}
+          className="hover:underline"
+        >
           By {author.name}
         </Link>
         <span>• {formatDate(publishedAt)}</span>
@@ -75,9 +82,19 @@ export default function Post({ post }) {
       )}
 
       {/* Post Body */}
-       <div className="">
-      <PortableText value={body} components={PortableTextComponent} />
-    </div>
+      <div className="">
+        <PortableText value={body} components={PortableTextComponent} />
+      </div>
+
+      {/* Comment Imput */}
+      <div className="pb-6 pt-12">
+        <CommentForm postId={_id} />
+      </div>
+
+      {/* Comment Thread */}
+      <div className="bg-sky-100 p-6">
+        <CommentThread comments={post.comments} />
+      </div>
     </main>
   );
 }
@@ -97,7 +114,6 @@ export async function getStaticProps({ params }) {
   const layoutProps = await getLayoutProps();
 
   if (!post) return { notFound: true };
-
   return {
     props: { post, ...layoutProps },
     revalidate: 60,
