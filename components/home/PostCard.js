@@ -6,10 +6,10 @@ export default function PostCard({ postCardDetails }) {
   const { title, slug, author, publishedAt, mainImage, tags } = postCardDetails;
 
   return (
-    <div className="max-w-full bg-slate-50 border border-gray-200 transition duration-300 overflow-hidden">
+    <div className="max-w-full h-100 justify-between bg-slate-50 border border-gray-200 transition duration-300 overflow-hidden">
       {/* Image */}
       {mainImage?.asset?.url && (
-        <div className="relative w-full h-48">
+        <div className="relative w-full min-h-42">
           <Image
             src={mainImage.asset.url}
             alt={mainImage.alt || title}
@@ -20,7 +20,7 @@ export default function PostCard({ postCardDetails }) {
       )}
 
       {/* Content */}
-      <div className="p-4 flex flex-col space-y-3">
+      <div className="p-4 flex flex-col min-h-60 max-h-60 space-y-3">
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
           {tags?.map((tag) => (
@@ -43,7 +43,7 @@ export default function PostCard({ postCardDetails }) {
         </div>
 
         {/* Title */}
-        <h2 className="cursor-pointer text-lg font-semibold text-gray-800 hover:text-blue-600">
+        <h2 className="cursor-pointer max-w-[300px] text-lg font-semibold text-gray-800 hover:text-blue-600">
           <Link href={`/${slug.current}`}>{title}</Link>
         </h2>
 

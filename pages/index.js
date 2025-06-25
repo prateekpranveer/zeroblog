@@ -14,7 +14,7 @@ export default function Home({ sixPosts1, d1, sixPosts2, d2, sixPosts3, d3, feat
 
       <div className="mt-12">
         <div className="text-2xl font-bold text-gray-700 underline">
-          <Link href={`/category/${d1.slug.current}`}>{d1.name}</Link>
+          <Link href={`/category/${d1?.slug.current}`}>{d1?.name}</Link>
         </div>
         <div className="mt-4">
           <Slider posts={sixPosts1}/>
@@ -24,7 +24,7 @@ export default function Home({ sixPosts1, d1, sixPosts2, d2, sixPosts3, d3, feat
 
       <div className="mt-12">
         <div className="text-2xl font-bold text-gray-700 underline">
-          <Link href={`/category/${d2.slug.current}`}>{d2.name}</Link>
+          <Link href={`/category/${d2?.slug.current}`}>{d2?.name}</Link>
         </div>
         <div className="mt-4">
           <Slider posts={sixPosts2}/>
@@ -33,7 +33,7 @@ export default function Home({ sixPosts1, d1, sixPosts2, d2, sixPosts3, d3, feat
 
       <div className="mt-12">
         <div className="text-2xl font-bold text-gray-700 underline">
-          <Link href={`/tag/${d3?.slug?.current}`}>{d3.name}</Link>
+          <Link href={`/tag/${d3?.slug?.current}`}>{d3?.name}</Link>
         </div>
         <div className="mt-4">
           <Slider posts={sixPosts3}/>

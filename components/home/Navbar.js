@@ -11,7 +11,7 @@ export default function Navbar({ onSearchClick, onSidebarToggle }) {
       <div className="flex items-center">
         <Link href="/" aria-label="Home" className="cursor-pointer">
           <span className="">ZERO</span>{" "}
-          <span className="text-gray-400 font-extrabold">FRAMEDROPS</span>
+          <span className="text-gray-400 font-extrabold">FRAMEDROP</span>
         </Link>
       </div>
 

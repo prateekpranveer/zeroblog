@@ -7,7 +7,7 @@ export default function Footer({ categories = [], tags = [] }) {
         {/* Logo + Intro */}
         <div className="space-y-4">
           <div className="mb-4">
-            <Link href={'/'}><span>ZERO</span> <span className="text-gray-300 font-bold tracking-wider">FRAMEDROPS</span></Link>
+            <Link href={'/'}><span>ZERO</span> <span className="text-gray-300 font-bold tracking-wider">FRAMEDROP</span></Link>
           </div>
           <p className="text-sm text-gray-400">
             Discover insightful blogs on tips, tools, and tech. Stay updated with the best of WordPress + Next.js.
