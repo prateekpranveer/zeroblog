@@ -6,12 +6,12 @@ import { HiOutlineMenu } from "react-icons/hi"; // Hamburger Icon from HeroIcons
 
 export default function Navbar({ onSearchClick, onSidebarToggle }) {
   return (
-    <div className="flex max-w-3xl mx-auto mt-4 py-4 px-4 h-full items-center justify-between">
+    <div className="flex max-w-3xl mx-auto mt-4 px-4 h-full items-center justify-between">
       {/* Logo */}
       <div className="flex items-center">
         <Link href="/" aria-label="Home" className="cursor-pointer">
           <span className="">ZERO</span>{" "}
-          <span className="text-gray-400 font-extrabold">FRAMEDROP</span>
+          <span className="font-extrabold">FRAMEDROP</span>
         </Link>
       </div>
 

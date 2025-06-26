@@ -1,11 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
 @import "tailwindcss";
 
 * {
   box-sizing: border-box;
-  font-family: baskervville;
+  font-family: roboto serif;
 }
 
+.roboto-serif {
+  font-family: roboto serif;
+}
+
+.roboto-flex {
+  font-family: roboto flex;
+}
 /* NProgress custom bar style */
 #nprogress {
   pointer-events: none;

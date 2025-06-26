@@ -85,16 +85,19 @@ export default function Post({ post }) {
             </h1>
 
             {/* Author, Date, Read Time */}
-            <div className="flex flex-wrap text-sm text-gray-600 mb-6 space-x-4">
+            <div className="flex flex-wrap items-center text-sm mb-6 gap-4">
               <span itemProp="author" itemScope itemType="https://schema.org/Person">
-                <Link href={`/author/${author.slug.current}`} className="hover:underline">
-                  <span itemProp="name">By {author.name}</span>
+                <Link href={`/author/${author.slug.current}`} className="flex justify-center items-center space-x-2 hover:underline">
+                  <span><Image className="rounded-full border border-1 border-gray-400" width={25} height={25} src={author.image?.asset?.url}/></span>
+                  <span className="underline text-sky-600" itemProp="name">{author.name}</span>
                 </Link>
               </span>
+              <div className="flex gap-2">
               <time itemProp="datePublished" dateTime={publishedAt}>
                 • {formatDate(publishedAt)}
               </time>
               {estimatedReadTime && <span>• {estimatedReadTime} min read</span>}
+              </div>
             </div>
 
             {/* Categories */}
@@ -104,9 +107,9 @@ export default function Post({ post }) {
                   <Link
                     key={category.slug.current}
                     href={`/category/${category.slug.current}`}
-                    className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded hover:bg-blue-200 transition"
+                    className="text-xs bg-blue-800 text-slate-100 px-2 py-1 rounded-sm hover:bg-black transition"
                   >
-                    {category.name}
+                   {category.name}
                   </Link>
                 ))}
               </div>
@@ -121,7 +124,7 @@ export default function Post({ post }) {
                 alt={mainImage.alt || title}
                 width={800}
                 height={400}
-                className="rounded-lg object-cover w-full"
+                className="rounded-sm object-cover w-full"
                 itemProp="image"
               />
             </figure>
@@ -129,14 +132,14 @@ export default function Post({ post }) {
 
           {/* Tags */}
           {tags?.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex text-sm rounded-sm flex-wrap gap-2 mb-6">
               {tags.map((tag) => (
                 <Link
                   key={tag.slug.current}
                   href={`/tag/${tag.slug.current}`}
-                  className="text-xs bg-gray-200 text-gray-700 px-2 py-0.5 rounded hover:bg-gray-300 transition"
+                  className="text-xs border border-gray-800 px-2 py-0.5 rounded hover:bg-gray-300 transition"
                 >
-                  #{tag.name}
+                   #{tag.name}
                 </Link>
               ))}
             </div>

@@ -10,7 +10,7 @@ export default function Footer({ categories = [], tags = [] }) {
             <Link href={'/'}><span>ZERO</span> <span className="text-gray-300 font-bold tracking-wider">FRAMEDROP</span></Link>
           </div>
           <p className="text-sm text-gray-400">
-            Discover insightful blogs on tips, tools, and tech. Stay updated with the best of WordPress + Next.js.
+            Discover insightful blogs on Frame Drops in PC, CPU and Tools, and other Performance powering parts. Stay unconfused with ZeroFrameDrop.
           </p>
         </div>
 
