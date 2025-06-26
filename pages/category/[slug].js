@@ -15,9 +15,9 @@ export default function CategoryPage({ category, posts }) {
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": `${category.name} - ZeroFrameDrop`,
-    "description": `Browse expert articles and detailed posts under the category: ${category.name}.`,
-    "url": `${siteUrl}${pageSlug}`,
+    name: `${category.name} - ZeroFrameDrop`,
+    description: `Browse expert articles and detailed posts under the category: ${category.name}.`,
+    url: `${siteUrl}${pageSlug}`,
   };
 
   return (
@@ -43,6 +43,7 @@ export default function CategoryPage({ category, posts }) {
       </h1>
 
       <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.length == 0 && <>No Posts Found in this Category!</>}
         {posts.map((post) => (
           <PostCard key={post._id} postCardDetails={post} />
         ))}
@@ -63,9 +64,7 @@ export async function getStaticProps({ params }) {
   const category = await fetchCategoryDetails(params.slug);
   const posts = await fetchPostsByCategory(params.slug);
   const layoutProps = await getLayoutProps();
-
-  if (!category) return { notFound: true };
-
+  if (!category) return { notFound: true}
   return {
     props: {
       category,

@@ -18,7 +18,7 @@ export default function Home({ sixPosts1, d1, sixPosts2, d2, sixPosts3, d3, feat
   };
 
   return (
-    <>
+    <div>
       {/* ✅ SEO */}
       <SEO
         title="ZeroFrameDrop | PC Hardware, GPUs, and Gaming Optimizations"
@@ -68,14 +68,14 @@ export default function Home({ sixPosts1, d1, sixPosts2, d2, sixPosts3, d3, feat
           <Slider posts={sixPosts3} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
 export async function getStaticProps() {
   const featuredPost = await fetchFeaturedPost();
-  const sixPosts1 = await fetchPostsByCategorySix("integrated-gpus");
-  const d1 = await fetchCategoryDetails("integrated-gpus");
+  const sixPosts1 = await fetchPostsByCategorySix("gaming-optimizations");
+  const d1 = await fetchCategoryDetails("gaming-optimizations");
   const sixPosts2 = await fetchPostsByCategorySix("workstation-gpus");
   const d2 = await fetchCategoryDetails("workstation-gpus");
   const sixPosts3 = await fetchPostsByTagSix("ray-tracing");

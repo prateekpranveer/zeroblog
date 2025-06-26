@@ -8,7 +8,7 @@ export default function FeaturedPost({ post }) {
   return (
     <article className="flex max-w-6xl flex-col lg:flex-row mx-auto rounded overflow-hidden shadow-md">
       {/* Featured Image */}
-      <div className="relative h-[300px] sm:h-[360px] lg:w-2/5 min-w-[300px]">
+      <div className="relative -z-2 h-[300px] sm:h-[360px] lg:w-2/5 min-w-[300px]">
         {mainImage?.asset?.url && (
           <Image
             src={mainImage.asset.url}
