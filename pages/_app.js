@@ -4,6 +4,8 @@ import Router from "next/router";
 import nProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { useEffect } from "react";
+import Head from "next/head";
+
 nProgress.configure({ showSpinner: false, trickleSpeed: 100 });
 
 export default function App({ Component, pageProps }) {
@@ -23,12 +25,31 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <Layout
-      recentPosts={pageProps.recentPosts}
-      tags={pageProps.allTags}
-      categories={pageProps.allCategories}
-    >
-      <Component {...pageProps} />
-    </Layout>
+    <>
+      {/* Favicon and Organization Logo Schema */}
+      <Head>
+        {/* Favicon */}
+        <link rel="icon" type="image/png" href="/favicon.png" />
+
+        {/* Organization Schema */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "url": "https://zeroframedrop.com",
+            "logo": "https://zeroframedrop.com/logo.png",
+            "name": "ZeroFrameDrop"
+          })
+        }} />
+      </Head>
+
+      <Layout
+        recentPosts={pageProps.recentPosts}
+        tags={pageProps.allTags}
+        categories={pageProps.allCategories}
+      >
+        <Component {...pageProps} />
+      </Layout>
+    </>
   );
 }

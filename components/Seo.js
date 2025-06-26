@@ -31,6 +31,10 @@ export default function SEO({
 
   return (
     <Head>
+      {/* ✅ Favicon for Browser and Google Search */}
+      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" type="image/png" href="/icons-192.png" />
+
       {/* ✅ Basic SEO */}
       <title>{title}</title>
       <meta name="description" content={description} />
