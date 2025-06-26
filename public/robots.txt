@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /studio
+
+# Host
+Host: https://zeroframedrop.com
+
+# Sitemaps
+Sitemap: https://zeroframedrop.com/sitemap.xml

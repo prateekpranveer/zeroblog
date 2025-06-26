@@ -1,3 +1,4 @@
+import SEO from "@/components/Seo";
 import { getLayoutProps } from "@/lib/layoutData";
 import { fetchAllPostSlugs, fetchPostBySlug } from "@/lib/queryFunctions";
 import { formatDate } from "@/lib/formatDate";
@@ -5,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { PortableTextComponent } from "@/components/shared/PortableTextCompnent";
-import { client } from "@/src/sanity/lib/client";
 import CommentForm from "@/components/shared/CommentForm";
 import CommentThread from "@/components/shared/CommentThread";
 
@@ -14,88 +14,151 @@ export default function Post({ post }) {
     _id,
     title,
     slug,
+    metaTitle,
+    metaDescription,
     author,
     categories,
     estimatedReadTime,
     mainImage,
     publishedAt,
     tags,
-    body, // Assuming your post has a body field with Portable Text content
+    body,
   } = post;
 
+  const postUrl = `https://zeroframedrop.com/${slug.current}`;
+  const imageUrl = mainImage?.asset?.url
+    ? mainImage.asset.url
+    : "https://zeroframedrop.com/default-og-image.jpg";
+
+  // ✅ JSON-LD Article Schema
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": postUrl,
+    },
+    "headline": title,
+    "description": metaDescription,
+    "image": [imageUrl],
+    "author": {
+      "@type": "Person",
+      "name": author.name,
+      "url": `https://zeroframedrop.com/author/${author.slug.current}`,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "ZeroFrameDrop",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://zeroframedrop.com/logo.png",
+      },
+    },
+    "datePublished": formatDate(publishedAt),
+    "dateModified": formatDate(publishedAt),
+  };
+
   return (
-    <main className="max-w-3xl mx-auto py-2">
-      {/* Title */}
-      <h1 className="text-3xl font-bold mb-4 text-gray-900">{title}</h1>
+    <>
+      {/* ✅ SEO Meta */}
+      <SEO
+        title={metaTitle || title}
+        description={metaDescription}
+        slug={`/${slug.current}`}
+        image={imageUrl}
+        type="article"
+        articlePublishedTime={publishedAt}
+        articleAuthorName={author.name}
+        structuredData={articleSchema}
+      />
 
-      {/* Meta: Author / Date / Read Time */}
-      <div className="flex flex-wrap text-sm text-gray-600 mb-6 space-x-4">
-        <Link
-          href={`/author/${author.slug.current}`}
-          className="hover:underline"
+      <main className="max-w-3xl mx-auto py-2">
+        <article
+          itemScope
+          itemType="https://schema.org/BlogPosting"
+          className="prose lg:prose-lg max-w-full"
         >
-          By {author.name}
-        </Link>
-        <span>• {formatDate(publishedAt)}</span>
-        {estimatedReadTime && <span>• {estimatedReadTime} min read</span>}
-      </div>
+          {/* Title */}
+          <header>
+            <h1 itemProp="headline" className="text-3xl font-bold mb-4 text-gray-900">
+              {title}
+            </h1>
 
-      {/* Categories */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {categories?.map((category) => (
-          <Link
-            key={category.slug.current}
-            href={`/category/${category.slug.current}`}
-            className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded hover:bg-blue-200 transition"
-          >
-            {category.name}
-          </Link>
-        ))}
-      </div>
+            {/* Author, Date, Read Time */}
+            <div className="flex flex-wrap text-sm text-gray-600 mb-6 space-x-4">
+              <span itemProp="author" itemScope itemType="https://schema.org/Person">
+                <Link href={`/author/${author.slug.current}`} className="hover:underline">
+                  <span itemProp="name">By {author.name}</span>
+                </Link>
+              </span>
+              <time itemProp="datePublished" dateTime={publishedAt}>
+                • {formatDate(publishedAt)}
+              </time>
+              {estimatedReadTime && <span>• {estimatedReadTime} min read</span>}
+            </div>
 
-      {/* Main Image */}
-      {mainImage?.asset?.url && (
-        <div className="mb-6">
-          <Image
-            src={mainImage.asset.url}
-            alt={mainImage.alt || title}
-            width={800}
-            height={400}
-            className="rounded-lg object-cover w-full"
-          />
-        </div>
-      )}
+            {/* Categories */}
+            {categories?.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-6">
+                {categories.map((category) => (
+                  <Link
+                    key={category.slug.current}
+                    href={`/category/${category.slug.current}`}
+                    className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded hover:bg-blue-200 transition"
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </header>
 
-      {/* Tags */}
-      {tags?.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-6">
-          {tags.map((tag) => (
-            <Link
-              key={tag.slug.current}
-              href={`/tag/${tag.slug.current}`}
-              className="text-xs bg-gray-200 text-gray-700 px-2 py-0.5 rounded hover:bg-gray-300 transition"
-            >
-              #{tag.name}
-            </Link>
-          ))}
-        </div>
-      )}
+          {/* Main Image */}
+          {mainImage?.asset?.url && (
+            <figure className="mb-6">
+              <Image
+                src={mainImage.asset.url}
+                alt={mainImage.alt || title}
+                width={800}
+                height={400}
+                className="rounded-lg object-cover w-full"
+                itemProp="image"
+              />
+            </figure>
+          )}
 
-      {/* Post Body */}
-      <div className="">
-        <PortableText value={body} components={PortableTextComponent} />
-      </div>
+          {/* Tags */}
+          {tags?.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-6">
+              {tags.map((tag) => (
+                <Link
+                  key={tag.slug.current}
+                  href={`/tag/${tag.slug.current}`}
+                  className="text-xs bg-gray-200 text-gray-700 px-2 py-0.5 rounded hover:bg-gray-300 transition"
+                >
+                  #{tag.name}
+                </Link>
+              ))}
+            </div>
+          )}
 
-      {/* Comment Imput */}
-      <div className="pb-6 pt-12">
-        <CommentForm postId={_id} />
-      </div>
+          {/* Article Body */}
+          <section itemProp="articleBody">
+            <PortableText value={body} components={PortableTextComponent} />
+          </section>
+        </article>
 
-      {/* Comment Thread */}
-      <div className="bg-sky-100 p-6">
-        <CommentThread comments={post.comments} />
-      </div>
-    </main>
+        {/* Comment Form */}
+        <section className="pb-6 pt-12">
+          <CommentForm postId={_id} />
+        </section>
+
+        {/* Comment Thread */}
+        <section className="bg-sky-100 p-6">
+          <CommentThread comments={post.comments} />
+        </section>
+      </main>
+    </>
   );
 }
 

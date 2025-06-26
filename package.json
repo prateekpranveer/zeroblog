@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postbuild": "next-sitemap",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+
   },
   "dependencies": {
     "@sanity/icons": "^3.7.4",
@@ -14,6 +16,7 @@
     "@sanity/vision": "^3.94.0",
     "next": "15.3.4",
     "next-sanity": "^9.12.0",
+    "next-sitemap": "^4.2.3",
     "nprogress": "^0.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

@@ -1,18 +1,18 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import PostCard from '../home/PostCard';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import PostCard from "../home/PostCard";
 
-export default function Slider({ posts = [], title}) {
-  if (!posts?.length) return <p className="text-gray-500 px-4">No Posts Available!</p>;
+export default function Slider({ posts = [], title }) {
+  if (!posts?.length)
+    return <p className="text-gray-500 px-4">No Posts Available!</p>;
 
   return (
-    <section
-      className="mt-8"
-      role="region"
-    >
-      <h1 className='text-3xl mb-8 mt-12'>{title && title.charAt(0).toUpperCase() + title.slice(1)}</h1>
+    <section className="mt-8" role="region">
+      <h2 className="text-3xl mb-8 mt-12">
+        {title && title.charAt(0).toUpperCase() + title.slice(1)}
+      </h2>
       <Swiper
         modules={[Navigation]}
         navigation
