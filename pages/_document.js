@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 
           {/* Favicon and App Icons */}
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
           <link
             rel="apple-touch-icon"
             sizes="180x180"
